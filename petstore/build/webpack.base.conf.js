@@ -3,6 +3,7 @@ var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
 
+
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
@@ -16,7 +17,9 @@ module.exports = {
     filename: '[name].js',
     publicPath: process.env.NODE_ENV === 'production'
       ? config.build.assetsPublicPath
-      : config.dev.assetsPublicPath
+      : config.dev.assetsPublicPath,
+    //devtoolModuleFilenameTemplate: '[absolute-resource-path]',
+    //devtoolFallbackModuleFilenameTemplate: '[absolute-resource-path]?[hash]'
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
@@ -25,6 +28,7 @@ module.exports = {
       '@': resolve('src'),
     }
   },
+  devtool: 'inline-cheap-module-source-map',
   module: {
     rules: [
       {
@@ -63,4 +67,11 @@ module.exports = {
       }
     ]
   }
+}
+
+
+// test specific setups
+if (process.env.NODE_ENV === 'test') {
+  module.exports.externals = [require('webpack-node-externals')()]
+  module.exports.devtool = 'inline-cheap-module-source-map'
 }

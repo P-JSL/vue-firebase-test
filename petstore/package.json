@@ -10,7 +10,14 @@
     "build": "node build/build.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
-    "test": "npm run unit && npm run e2e"
+    "inspect": "node --inspect --inspect-brk node_modules/mocha-webpack/bin/mocha-webpack --webpack-config build/webpack.base.conf.js --require test/setup.js    test/**/*.spec.js"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.(js|vue)"
+    ],
+    "instrument": false,
+    "sourceMap": false
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.6.7",

@@ -27,9 +27,9 @@
 </template>
 
 <script>
-import firebase from 'firebase';
+import firebase from 'firebase/firebase';
 export default {
-  name: 'my-header',
+  name: 'Header',
   data () {
     return {
       sitename: "Vue.js 애완용품샵"
@@ -37,11 +37,14 @@ export default {
   },
   props: ['cartItemCount'],
   beforeCreate() {
-    firebase.auth().onAuthStateChanged((user)=> {
-      this.$store.commit('SET_SESSION', user || false)
-    });
+      firebase.auth().onAuthStateChanged((user)=> {
+          this.$store.commit('SET_SESSION', user || false)
+      });
   },
   methods: {
+    showCheckout() {
+      this.$router.push({name: 'Form'});
+    },
     signIn() {
       let provider = new firebase.auth.GoogleAuthProvider();
       firebase.auth().signInWithPopup(provider).then(function(result) {
@@ -52,11 +55,11 @@ export default {
     },
     signOut() {
       firebase.auth().signOut().then(function() {
-        // 로그아웃 성공
+        // Sign-out successful.
         console.log("로그아웃!")
       }).catch(function(error) {
         console.log("로그아웃 에러!")
-        // 에러 발생
+        // An error happened.
       });
     }
   },
@@ -80,8 +83,8 @@ a {
   width: 25px;
   height: 25px;
 }
-
 .router-link-exact-active {
   color: black;
 }
+
 </style>

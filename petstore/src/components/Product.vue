@@ -22,8 +22,7 @@
   </template>
   <script>
   import MyHeader from './Header.vue'
-  import { productsRef } from '../firebase.js';
-
+  import { productsRef } from '../firebase';
   export default {
     components: { MyHeader },
     firebase: {

@@ -132,13 +132,14 @@ export default {
         sendGift: '선물로 보내기',
         dontSendGift: '선물로 보내기 않기'
       },
+      madeOrder: false
 
     }
   },
   components: { MyHeader },
   methods: {
     submitForm() {
-      alert('제출완료')
+      this.madeOrder = true;
     }
   }
 }

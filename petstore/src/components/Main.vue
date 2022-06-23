@@ -10,7 +10,7 @@
         </figure>
       </div>
       <div class="col-md-6 col-md-offset-0 description">
-        <router-link tag="h1" :to="{ name : 'Id', params: {id: product.id}}" >{{product.title}}</router-link>
+      <router-link tag="h1" :to="{ name : 'Id', params: {id: product.id}}" >{{product.title}}</router-link>
         <p v-html="product.description"></p>
         <p class="price">
         {{product.price | formatPrice}}
@@ -50,7 +50,8 @@
 <script>
 import MyHeader from './Header.vue';
 import {mapGetters} from 'vuex';
-import {productsRef} from '../firebase'
+import { productsRef } from '../firebase';
+
 export default {
   name: 'imain',
   firebase: {
@@ -58,7 +59,7 @@ export default {
   },
   data () {
     return {
-      cart: []
+      cart: [],
     }
   },
   components: { MyHeader },
@@ -85,7 +86,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-          'session'
+        'session'
     ]),
     cartItemCount() {
       return this.cart.length || '';
